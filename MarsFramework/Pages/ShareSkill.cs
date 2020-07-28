@@ -102,36 +102,31 @@ namespace MarsFramework.Pages
 
 		public void EnterShareSkill()
 		{
-				GlobalDefinitions.Wait();
-				ShareSkillButton.Click();
+			GlobalDefinitions.Wait();
+			ShareSkillButton.Click();
 			//Checking the right page
-				Assert.AreEqual("ServiceListing", GlobalDefinitions.driver.Title);
-				Base.test = Base.extent.StartTest("On Share Skill page");
+			Assert.AreEqual("ServiceListing", GlobalDefinitions.driver.Title);
+			Base.test = Base.extent.StartTest("On Share Skill page");
 			//Populate the Excel Sheet
 			Global.ExcelLib.PopulateInCollection(Base.ExcelPath, "ShareSkill");
-			//Enter TITLE			
+				
 				Title.SendKeys(ExcelLib.ReadData(2, "Title"));
-			//Check Length of Title
 				GenericMethods.CheckLength(4, 100, ExcelLib.ReadData(2, "Title"), "Title");
-			//Enter Description
 				Description.SendKeys(ExcelLib.ReadData(2, "Description"));
 				GenericMethods.CheckLength(4, 600, ExcelLib.ReadData(2, "Description"), "Description");
-			//Select Category form dropdown
 				CategoryDropDown.SendKeys(ExcelLib.ReadData(2, "Category"));
 				SubCategoryDropDown.SendKeys(ExcelLib.ReadData(2, "SubCategory"));
-			//Enter tag
+
 				TxtTags.SendKeys(ExcelLib.ReadData(2, "Tags"));
 				TxtTags.SendKeys(Keys.Enter);
-			//Select service Type
 				IWebElement ServiceTypeOptions = GlobalDefinitions.driver.FindElement(By.XPath("//form/div[5]/div[@class='twelve wide column']/div/div[@class='field']"));
 				ServiceTypeOptions.Click();
-			//Select Location Type
+
 				IWebElement LocationTypeOption = GlobalDefinitions.driver.FindElement(By.XPath("//div[6]//div[2]//div[1]//div[1]//div[1]//input[1]"));
 				LocationTypeOption.Click();
-			//Enter start Date and End date	
+				
 				StartDateDropDown.SendKeys(ExcelLib.ReadData(2, "Startdate"));
 				EndDateDropDown.SendKeys(ExcelLib.ReadData(2, "Enddate"));
-			// Loop for no. of days available,Start time and End time	
 				for (int i = 2; i < 9; i++)
 				{
 				
@@ -156,7 +151,7 @@ namespace MarsFramework.Pages
 
 					}
 				}
-				// Select Skill Trade
+
 				IWebElement credit = GlobalDefinitions.driver.FindElement(By.XPath("//div[8]//div[2]//div[1]//div[2]//div[1]//input[1]"));
 
 				//Checking if the radio is selected or not
@@ -166,19 +161,19 @@ namespace MarsFramework.Pages
 
 				}
 				Boolean status = GlobalDefinitions.driver.FindElement(By.XPath("//input[@type='radio']")).Selected;
-			//To Check Radiobutton is selected or not
+
 				if (status)
 				{
-					Console.WriteLine("RadioButton is checked");
+					Console.WriteLine("Checkbox is checked");
 				}
 				else
 				{
-					Console.WriteLine("RadioButton is unchecked");
+					Console.WriteLine("Checkbox is unchecked");
 				}
-			//Enter SkillExchange	
+				
 				SkillExchange.SendKeys(ExcelLib.ReadData(2, "Skill-Exchange"));
 				SkillExchange.SendKeys(Keys.Enter);
-			//Upload File Using Auto IT
+			//File Upload using AutoIt
 				WorkSample.Click();
 
 				AutoItX3 autoIt = new AutoItX3();
@@ -194,7 +189,8 @@ namespace MarsFramework.Pages
 			
 				autoIt.Send("{ENTER}");
 				autoIt.Sleep(1000);
-			//Select Active Type
+
+
 			IWebElement ActiveOption = GlobalDefinitions.driver.FindElement(By.XPath("//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']"));
 			ActiveOption.Click();
 			GlobalDefinitions.Wait();
@@ -202,9 +198,6 @@ namespace MarsFramework.Pages
 			GlobalDefinitions.Wait();
 			
 			Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Skills Added Successfully");
-			//Assert.AreEqual("ServiceListing", GlobalDefinitions.driver.Title);
-
-	//Assert on category/title/Service Type after adding the skill and displayed on Manage Listing Page
 				string searchInput1 = GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[2]")).Text;
 				Assert.AreEqual(searchInput1, "Programming & Tech");
 				string searchInput2 = GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[3]")).Text;
