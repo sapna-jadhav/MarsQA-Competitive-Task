@@ -197,11 +197,11 @@ namespace MarsFramework.Pages
 			GlobalDefinitions.Wait();
 			Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Skills edited succesfully");
 			string searchInput1 = GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[2]")).Text;
-			Assert.AreEqual(searchInput1, "Programming & Tech");
+			Assert.AreEqual(searchInput1, ExcelLib.ReadData(3, "Category"));
 			string searchInput2 = GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[3]")).Text;
-			Assert.AreEqual(searchInput2, "Python");
+			Assert.AreEqual(searchInput2, ExcelLib.ReadData(3, "Title"));
 			string searchInput3 = GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[5]")).Text;
-			Assert.AreEqual(searchInput3, "One-off");
+			Assert.AreEqual(searchInput3, ExcelLib.ReadData(3, "ServiceType"));
 
 		}
 
@@ -217,7 +217,7 @@ namespace MarsFramework.Pages
 			try
 			{
 				String ActLang2 = (GlobalDefinitions.driver.FindElement(By.XPath("//tbody//tr[1]//td[2]"))).Text;
-				Assert.AreNotEqual(ActLang2, "Python");
+				Assert.AreNotEqual(ActLang2, ExcelLib.ReadData(3, "Title"));
 			}
 			catch
 			{
